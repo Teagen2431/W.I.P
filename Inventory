@@ -1,0 +1,222 @@
+import time
+
+#EMPTY VARIABLES SO YOU CAN CALL THEM LATER
+response = ''
+store_name = 'NOT SET'
+group = 0
+group1 = {}
+group2 = {}
+group3 = {}
+group4 = {}
+group1_mod_name = ''
+group1_inv_add = ''
+group1_name = ''
+group2_mod_name = ''
+group2_inv_add = ''
+group2_name = ''
+group3_mod_name = ''
+group3_inv_add = ''
+group3_name = ''
+group4_mod_name = ''
+group4_inv_add = ''
+group4_name = ''
+
+while response != "q" or response != 'Q':
+    #FUNCTIONS
+    #acces to menu 1/Create store name and how many catagorys
+    def men1():
+        #ask the user if they information they input is true
+        def check():
+            print('------')
+            y_n = str(
+                input(
+                    f'Your store name is called {store_name} with {group} groups, is this correct? (Y,N): '
+                ))
+            #check to see if they say all the data is good
+            if y_n == 'y' or y_n == 'Y' or y_n == 'yes' or y_n == 'YES':
+                print('------')
+                print('Returing to home screen...')
+                print('-----\n')
+                #pauses it
+                time.sleep(2)
+            #if they say that all data is not good then it will have them redo their data
+            elif y_n == 'n':
+                print('Please redo your data')
+                men1()
+            else:
+                print('------')
+                print('Please put yes or no')
+                check()
+
+        def cata():
+            #ask how many catagorys they have for their shop
+            global group
+            #checks to see if user added any letters and if they did tek tem they cant
+            try:
+                group = int(
+                    input(
+                        'How many groups do you have or press 0 to quit? (UP TO 4 GROUPS): '))
+            except ValueError:
+                print('------')
+                print('PLEASE ENTER A NUMBER FROM 1-4 OR 0 TO QUIT')
+                print('------')
+                cata()
+                print('------')
+            #kicks them back to main screen and sets group to not set
+            if group == 0:
+                print('Returing you back to the main menu please stand by....')
+                group = 'NOT SET'
+                time.sleep(2)
+            #if they didnt put a 0 it checks to make sure it is in the 4 group(s) limits
+            elif group >= 5 or group <= 0:
+                print('CANT HAVE A NUMBER HIGHER THEN 4 OR LOWER THEN 0')
+                cata()
+            #if everything is good then it will check to make sure evrything is good
+            else:
+                check()
+                print('\n')
+
+        #ask te user for their store name and make store_name global
+        global store_name
+        print('\n-------')
+        store_name = str(
+            input('What is your shop called or press q to quit: '))
+        print('-------')
+        #checks to see if they put a q to quit the sequence
+        if store_name == 'q' or store_name == 'Q' or store_name == 'quit' or store_name == 'QUIT':
+            print('returning you to the home screen')
+            store_name = 'NOT SET'
+        #if they didnt then it ill take the user to the group function
+        elif store_name != 'q' or store_name != 'Q' or store_name != 'quit' or store_name != 'QUIT':
+            cata()
+
+    #allows the user to name their first catagory if they wanted it
+    def group1_inv():
+        global group1_name
+        print('\n\n\n\n------')
+        group1_name = input("Whats the inventorys name?: ")
+        group1_add()
+
+    #This allows the user to add stuff to the first dictionary
+    def group1_add():
+      print('------')
+      try:
+        response = int(input(f'How many items are in {group1_name}?: '))
+        print('------')
+        for i in range(response):
+          group1_mod_name = input(f"enter the item name for the {group1_name} section: ")
+          print('------')
+          group1_inv_add = input(f"enter the amount for {group1_mod_name}: ")
+          print('------')
+          group1[group1_mod_name] = group1_inv_add
+        if group >= 2:
+          group2_inv()
+      except ValueError:
+        print('------')
+        print('Please enter a number')
+        group1_add()
+        
+    #allows the user to name their second catagory if they wanted it
+    def group2_inv():
+      global group2_name
+      print('\n\n\n\n------')
+      group2_name = input("Whats the inventorys name?: ")
+      group2_add()
+
+    #This allows the user to add stuff to the second dictionary
+    def group2_add():
+      try:
+        print('------')
+        response = int(input(f'How many items are in {group2_name}?: '))
+        print('------')
+        for i in range(response):        
+          group2_mod_name = input(f"enter the item name for the {group2_name} section: ")
+          print('------')
+          group2_inv_add = int(input(f"enter the amount for {group2_mod_name}: "))
+          print('------')
+          group2[group2_mod_name] = group2_inv_add
+        if group >= 3:
+          group3_inv()
+      except ValueError:
+        print('------')
+        group2_add()
+    #allows the user to name their third catagory if they wanted it
+    def group3_inv():
+      global group3_name
+      print('\n\n\n\n------')
+      group3_name = input("Whats the inventorys name?: ")
+      group3_add()
+
+    #This allows the user to add stuff to the third dictionary  
+    def group3_add():
+      try:
+        print('------')
+        response = int(input(f'How many items are in {group3_name}?: '))
+        print('------')
+        for i in range(response):        
+          group3_mod_name = input(f"enter the item name for the {group3_name} section: ")
+          print('------')
+          group3_inv_add = int(input(f"enter the amount for {group3_mod_name}: "))
+          print('------')
+          group3[group3_mod_name] = group3_inv_add
+        if group == 4:
+          group4_inv()
+      except ValueError:
+        print('------')
+        print('Please enter a number')
+        group3_add()
+
+      #allows the user to name their fourth catagory if they wanted it
+      def group4_inv():
+        global group4_name
+        print('\n\n\n\n------')
+        group4_name = input("Whats the inventorys name?: ")
+        group4_add()
+        
+      #This allows the user to add stuff to the fourth dictionary
+      def group4_add():
+        try:
+          print('------')
+          response = int(input(f'How many items are in {group4_name}?: '))
+          print('------')
+          for i in range(response):        
+            group4_mod_name = input(f"enter the item name for the {group4_name} section: ")
+            print('------')
+            group4_inv_add = int(input(f"enter the amount for {group4_mod_name}: "))
+            print('------')
+            group4[group4_mod_name] = group4_inv_add
+        except ValueError:
+          print('------')
+          print('Please enter a number')
+          group4_add()
+          
+    #allows the user to update and fix their menus
+    def men3():
+        print('c')
+
+    def men4():
+        print('c')
+
+        #main menu/selection menu
+    response = input(
+        f' ----- {store_name} ----- \n ----- {group} ----- \n ENTER 1 TO CREATE A NEW STORE \n ENTER 2 TO CREATE INVENTORY \n ENTER 3 TO MODIFY EXISTING INVENTORY \n ENTER 4 FOR ALERTS \n OR ENTER Q TO QUIT: ')
+
+    #sees which on they picked to take them to that function
+    if response == '1':
+        men1()
+        print('\n')
+    elif response == '2':
+        group1_inv()
+        print(' \n')
+    elif response == '3':
+        men3()
+        print(' \n')
+    elif response == '4':
+        men4()
+        print(' \n')
+      
+#if their buisness went out then this will shut their store menu down
+    elif response != 'q' or response != 'Q':
+        print(
+            '\nThank you for using over complicated list system please refer us to a friend')
+        break
